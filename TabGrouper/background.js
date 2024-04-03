@@ -9,7 +9,8 @@ function groupLeftTabs() {
                 const tabsToLeft = tabs.filter(tab => !tab.pinned && tab.index < activeTab.index);
                 if (tabsToLeft.length > 0) {
                     chrome.tabs.group({tabIds: tabsToLeft.map(tab => tab.id)}, (groupId) => {
-                        // Optional: Additional actions after grouping, like focusing the group
+                        // Collapse the group
+                        chrome.tabGroups.update(groupId, { collapsed: true });
                     });
                 }
             });
